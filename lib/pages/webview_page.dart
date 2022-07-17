@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -24,7 +23,6 @@ class _WebViewPageState extends State<WebViewPage>
     with WidgetsBindingObserver {
   //late WebVieticketControllerler _controller;
   late final Completer<WebViewController> _controller = Completer<WebViewController>();
-  late WebViewController _webViewController;
 
   @override
   void initState() {
@@ -49,7 +47,6 @@ class _WebViewPageState extends State<WebViewPage>
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () {
         Navigator.of(context).pop();
@@ -71,7 +68,6 @@ class _WebViewPageState extends State<WebViewPage>
               onWebViewCreated: (controller) {
                 //_controller = controller;
                 _controller.complete(controller);
-                _webViewController = controller;
               },
               onPageStarted: (value){
               },
@@ -80,7 +76,7 @@ class _WebViewPageState extends State<WebViewPage>
               onPageFinished: (value)async{},
               onWebResourceError: (error) {},
             ),
-            SizedBox(),
+            const SizedBox(),
           ],
         ),
       ),

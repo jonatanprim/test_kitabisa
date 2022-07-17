@@ -1,30 +1,53 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility that Flutter provides. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
+import 'package:get/get.dart';
 import 'package:testaja1/main.dart';
+import 'package:testaja1/pages/webview_page.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  group('Test HomePage', (){
+    testWidgets('Test campaign text', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const MyApp(),
+      );
+      await tester.pump();
+      final text = find.text('Campaigns');
+      expect(text, findsOneWidget);
+    });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    testWidgets('Test title text', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const MyApp(),
+      );
+      await tester.pump();
+      final text = find.text('Kitabisa');
+      expect(text, findsOneWidget);
+    });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    testWidgets('Test list campaign', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const MyApp(),
+      );
+      await tester.pump();
+      final listCampaign = find.byType(GridView);
+      expect(listCampaign, findsWidgets);
+    });
+
   });
+
+
+  group('Test WebViewPage', (){
+    testWidgets('Test title text', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const GetMaterialApp(
+            home: WebViewPage(url: 'https://kitabisa.com', title: 'Bantu anakku sembuh'),
+          ),
+      );
+      await tester.pump();
+      final text = find.text('Bantu anakku sembuh');
+      expect(text, findsOneWidget);
+    });
+  });
+
 }

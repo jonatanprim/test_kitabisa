@@ -1,4 +1,4 @@
-# testaja1
+# Kitabisa technical test
 
 Answer of technical test Kitabisa
 
